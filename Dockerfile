@@ -18,6 +18,5 @@ COPY src/main/liberty/config /opt/ol/wlp/usr/servers/defaultServer/
 COPY target/trader-1.0-SNAPSHOT.war /opt/ol/wlp/usr/servers/defaultServer/apps/TraderUI.war
 RUN chown -R 1001:0 config/
 USER 1001
-RUN ls -la ~
-RUN if [ -e certificate.pem ]; then keytool -import -v -trustcacerts -alias keycloak -file certificate.pem -keystore /opt/ol/wlp/usr/servers/defaultServer/resources/security/key.jks --noprompt --storepass passw0rd ; fi
+RUN if [ -e /workspace/certificate.pem ]; then keytool -import -v -trustcacerts -alias keycloak -file /workspace/certificate.pem -keystore /opt/ol/wlp/usr/servers/defaultServer/resources/security/key.jks --noprompt --storepass passw0rd ; fi
 RUN configure.sh
