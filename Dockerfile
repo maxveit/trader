@@ -17,8 +17,8 @@ USER root
 #   Note that I'm hard-coding the location of the Open Liberty server,
 #   because the /config soft link doesn't work in the OCP 3.11 pipeline
 #   (somehow, the soft link gets replaced by an actual /config directory)
-COPY /workspace/source/src/main/liberty/config /opt/ol/wlp/usr/servers/defaultServer/
-COPY /workspace/source/target/trader-1.0-SNAPSHOT.war /opt/ol/wlp/usr/servers/defaultServer/apps/TraderUI.war
+COPY /src/main/liberty/config /opt/ol/wlp/usr/servers/defaultServer/
+COPY /target/trader-1.0-SNAPSHOT.war /opt/ol/wlp/usr/servers/defaultServer/apps/TraderUI.war
 RUN chown -R 1001:0 config/
 USER 1001
 RUN configure.sh
