@@ -15,9 +15,8 @@
 FROM openliberty/open-liberty:kernel-java8-openj9-ubi
 USER root
 COPY src/main/liberty/config /opt/ol/wlp/usr/servers/defaultServer/
-COPY /workspace/source/target/trader-1.0-SNAPSHOT.war /opt/ol/wlp/usr/servers/defaultServer/apps/TraderUI.war
-COPY /workspace/certificate.pem /tmp/cert.pem
+COPY target/trader-1.0-SNAPSHOT.war /opt/ol/wlp/usr/servers/defaultServer/apps/TraderUI.war
 RUN chown -R 1001:0 config/
 USER 1001
-RUN if [ -f /tmp/cert.pem ]; then keytool -import -v -trustcacerts -alias keycloak -file /tmp/cert.pem -keystore /opt/ol/wlp/usr/servers/defaultServer/resources/security/key.jks --noprompt --storepass passw0rd ; fi
+RUN if [ -f certificate.pem ]; then keytool -import -v -trustcacerts -alias keycloak -file certificate.pem -keystore /opt/ol/wlp/usr/servers/defaultServer/resources/security/key.jks --noprompt --storepass passw0rd ; fi
 RUN configure.sh
